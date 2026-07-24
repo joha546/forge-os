@@ -1,0 +1,28 @@
+[project]
+name = "forge-voice"
+version = "0.1.0"
+description = "Voice pipeline for forge-os"
+requires-python = ">=3.11"
+dependencies = [
+    "edge-tts>=6.1",
+    "faster-whisper>=1.0",
+    "openai>=1.50",
+    "pyyaml>=6.0",
+    "sounddevice>=0.5",
+    "numpy>=1.26",
+    "mcp>=1.0",
+    "forge-memory",
+]
+
+[project.scripts]
+forge-voice = "forge_voice.main:main"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.uv.sources]
+forge-memory = { workspace = true }
+
+[tool.hatch.build.targets.wheel]
+packages = ["forge_voice"]
