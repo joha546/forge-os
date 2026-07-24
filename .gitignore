@@ -1,6 +1,21 @@
 # Runtime data (sqlite, chroma, piper models)
-data/
+data/*
+!data/.gitkeep
 
 # Chroma / sqlite artifacts
 *.db
 *.db-journal
+
+# Python / tooling caches
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+*.egg-info/
+.venv/
+
+# Secrets & local artifacts
+.env
+hello_tts.mp3
