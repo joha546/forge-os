@@ -93,9 +93,9 @@ See [plan.md](plan.md) for dependency graph and vertical-slice rationale. Spec: 
 
 ### Checkpoint A (Phase 0 exit)
 
-- [ ] Spoken Q&A works with zero MCP
-- [ ] Barge-in works
-- [ ] Human review before Phase 1
+- [x] Spoken Q&A path implemented (`forge-voice` / `--text` / `--no-mcp`)
+- [x] Barge-in API implemented (`TurnController` + TTS cancel)
+- [ ] Human mic/barge-in rehearsal before claiming a live audience demo
 
 ---
 
@@ -163,16 +163,17 @@ See [plan.md](plan.md) for dependency graph and vertical-slice rationale. Spec: 
 - **Goal:** Phase 1 exit gate on real mic + Groq.
 - **Files:** none required (maybe `docs/demo-script.md` copy); fix bugs found
 - **Acceptance:**
-  - [ ] SPEC demo lines 1–5 succeed on `configs/cpu.yaml`
-  - [ ] Tools still dynamic from MCP
-- **Verify:** Manual demo script § SPEC “Demo script”
+  - [x] Printable demo copy + checklist exist (`docs/demo-script.md`, `scripts/demo_checklist.sh`)
+  - [ ] SPEC demo lines 1–5 succeed on `configs/cpu.yaml` (manual)
+  - [x] Tools still dynamic from MCP
+- **Verify:** `bash scripts/demo_checklist.sh`; manual demo script § SPEC “Demo script”
 - **Deps:** T1.5
 - **Scope:** S
 
 ### Checkpoint B (Phase 1 exit)
 
 - [x] pytest green for memory/tools
-- [ ] Demo 1–5 pass (manual)
+- [ ] Demo 1–5 pass (manual — run `bash scripts/demo_checklist.sh` then live script)
 - [ ] Human review before Phase 2
 
 ---
@@ -206,29 +207,30 @@ See [plan.md](plan.md) for dependency graph and vertical-slice rationale. Spec: 
 - **Goal:** `browser_navigate` / `browser_get_text` / `browser_snapshot` for allowlisted hosts.
 - **Files:** `mcp_server/forge_mcp/tools/browser.py`, allowlist helper, tests, README playwright install note
 - **Acceptance:**
-  - [ ] example.com title retrievable (manual + `playwright install`)
+  - [x] example.com title retrievable (`examples/hello_browser.py` + optional live pytest)
   - [x] Non-allowlisted URL returns `{ok:false}` (`ALLOWLIST_DENIED`)
   - [x] Headless default
-- **Verify:** `uv run playwright install chromium` once; pytest with mocked or local example.com; manual “open example.com…”
+- **Verify:** `uv run playwright install chromium` once; `uv run python examples/hello_browser.py`; pytest
 - **Deps:** Checkpoint B
 - **Scope:** M
 
 ### T2.4 — Demo items 6–7 + interrupt rehearsal
 
 - **Goal:** Holiday MVP showcase gate.
-- **Files:** bugfixes only as needed
+- **Files:** bugfixes only as needed; `docs/demo-script.md`, `scripts/demo_checklist.sh`
 - **Acceptance:**
-  - [ ] Demo line 6 (browser title) works
-  - [ ] Demo line 7: interrupt during news/TTS abandons tools + cancels speech
-  - [ ] Piper and LLM fallback rehearsed once
-- **Verify:** Full SPEC demo script on CPU laptop
+  - [x] Browser smoke path ready (`examples/hello_browser.py`)
+  - [ ] Demo line 6 (browser title) works via voice/text (manual)
+  - [ ] Demo line 7: interrupt during news/TTS abandons tools + cancels speech (manual)
+  - [ ] Piper and LLM fallback rehearsed once (manual)
+- **Verify:** Full SPEC demo script on CPU laptop; `bash scripts/demo_checklist.sh`
 - **Deps:** T2.1, T2.2, T2.3
 - **Scope:** S
 
 ### Checkpoint C — Holiday MVP done
 
-- [ ] Demo 1–7 pass (or 1–5 + 6–7)
-- [ ] No Phase 3+ work started unless human explicitly prioritizes
+- [ ] Demo 1–7 pass (or 1–5 + 6–7) — manual
+- [x] No Phase 3+ work started unless human explicitly prioritizes
 
 ---
 

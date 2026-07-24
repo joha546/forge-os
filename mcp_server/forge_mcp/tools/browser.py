@@ -7,6 +7,7 @@ from urllib.parse import urlparse
 
 from forge_mcp.results import err, ok
 
+_playwright = None
 _browser = None
 _page = None
 
@@ -19,14 +20,26 @@ def _host_allowed(url: str, allowlist: list[str], allow_all: bool) -> bool:
 
 
 async def _ensure_browser(headless: bool = True):
-    global _browser, _page
+    global _playwright, _browser, _page
     if _browser is None:
         from playwright.async_api import async_playwright
 
-        pw = await async_playwright().start()
-        _browser = await pw.chromium.launch(headless=headless)
+        _playwright = await async_playwright().start()
+        _browser = await _playwright.chromium.launch(headless=headless)
         _page = await _browser.new_page()
     return _page
+
+
+async def close_browser() -> None:
+    """Shut down the shared Playwright browser (tests / scripts)."""
+    global _playwright, _browser, _page
+    if _browser is not None:
+        await _browser.close()
+    if _playwright is not None:
+        await _playwright.stop()
+    _playwright = None
+    _browser = None
+    _page = None
 
 
 async def browser_navigate(

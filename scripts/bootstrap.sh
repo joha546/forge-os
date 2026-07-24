@@ -20,5 +20,6 @@ if command -v apt-get >/dev/null 2>&1; then
 fi
 
 echo "Bootstrap complete."
+echo "Pre-demo: bash scripts/demo_checklist.sh"
 echo "Optional: uv run playwright install chromium"
 echo "Optional Piper voice: download en_US-lessac-medium.onnx to data/piper/"

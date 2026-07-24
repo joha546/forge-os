@@ -7,6 +7,8 @@ Local-first FRIDAY/JARVIS-style voice assistant — **Forge**. Free/self-hosted 
 - [SPEC.md](SPEC.md) — vision, phases, demo script
 - [docs/contracts.md](docs/contracts.md) — env, MCP tools, memory schemas
 - [docs/session-context.md](docs/session-context.md) — agent session pack
+- [docs/demo-script.md](docs/demo-script.md) — printable live demo steps
+- [docs/runbook.md](docs/runbook.md) — troubleshooting / ops
 - [tasks/todo.md](tasks/todo.md) — implementation tasks
 
 ## Prerequisites (Linux)
@@ -53,6 +55,20 @@ uv run forge-mcp --transport sse --host 127.0.0.1 --port 8765
 
 # Terminal B
 uv run forge-voice --config configs/cpu.yaml
+# or: uv run forge-voice --config configs/cpu.yaml --text
+```
+
+### Phase 2 — browser (once)
+
+```bash
+uv run playwright install chromium
+uv run python examples/hello_browser.py   # expect title Example Domain
+```
+
+### Pre-demo checklist
+
+```bash
+bash scripts/demo_checklist.sh
 ```
 
 ## Config
@@ -72,7 +88,7 @@ uv run ruff check .
 
 ## Demo script
 
-See SPEC.md § Demo script — time, news, memory, search, browser (Phase 2), interrupt.
+See [docs/demo-script.md](docs/demo-script.md) (also SPEC.md § Demo script) — time, news, memory, search, browser, interrupt.
 
 ## License
 
