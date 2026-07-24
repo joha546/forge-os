@@ -1,0 +1,57 @@
+persona:
+  name: Forge
+  style: "Concise, competent, slightly dry wit. Confirm tool actions briefly."
+
+llm:
+  model: llama-3.3-70b-versatile
+  fallback_models:
+    - openai/gpt-oss-20b
+    - llama-3.1-8b-instant
+  max_tool_rounds: 4
+  temperature: 0.4
+
+stt:
+  model_size: base
+  device: cpu
+  compute_type: int8
+
+tts:
+  provider: auto
+  edge_voice: en-US-GuyNeural
+  piper_model: data/piper/en_US-lessac-medium.onnx
+  speak_timeout_s: 10
+
+vad:
+  silence_ms: 700
+  min_utterance_ms: 400
+
+mcp:
+  transport: sse
+  url: http://127.0.0.1:8765/sse
+
+search:
+  backend: ddg
+  searxng_url: null
+  max_results: 5
+
+news:
+  feeds:
+    tech:
+      - https://feeds.arstechnica.com/arstechnica/technology-lab
+      - https://www.theverge.com/rss/index.xml
+      - https://hnrss.org/frontpage
+    world:
+      - https://feeds.bbci.co.uk/news/world/rss.xml
+    science:
+      - https://www.sciencedaily.com/rss/all.xml
+
+browser:
+  headless: true
+  allowlist:
+    - example.com
+    - "*.wikipedia.org"
+
+memory:
+  sqlite_path: data/sqlite/forge.db
+  chroma_path: data/chroma
+  collection: forge_memories

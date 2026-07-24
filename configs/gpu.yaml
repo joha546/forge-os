@@ -1,0 +1,4 @@
+stt:
+  model_size: small
+  device: cuda
+  compute_type: float16

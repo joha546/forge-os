@@ -1,0 +1,4 @@
+stt:
+  model_size: base
+  device: cpu
+  compute_type: int8

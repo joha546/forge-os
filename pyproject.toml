@@ -1,0 +1,36 @@
+[project]
+name = "forge-os"
+version = "0.1.0"
+description = "Local-first FRIDAY-style voice assistant — Forge"
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+
+[tool.uv.workspace]
+members = ["voice", "mcp_server", "memory"]
+
+[tool.uv.sources]
+forge-voice = { workspace = true }
+forge-mcp = { workspace = true }
+forge-memory = { workspace = true }
+
+[dependency-groups]
+dev = [
+    "pytest>=8.0",
+    "pytest-asyncio>=0.24",
+    "ruff>=0.8",
+    "forge-memory",
+    "forge-voice",
+    "forge-mcp",
+]
+
+[tool.pytest.ini_options]
+testpaths = ["voice/tests", "mcp_server/tests", "memory/tests", "tests"]
+asyncio_mode = "auto"
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP"]
